@@ -114,8 +114,12 @@ def entering_marks():
                     for x in ["first","secound","third"]:    
                         for y in ["Maths","Science","Art"]:
                             while True:
-                                marks = (input(f"{x} term {y} : "))
-                                if 0 <= int(marks) and int(marks) <= 100:
+                                try:
+                                    marks = int(input(f"{x} term {y} : "))
+                                except ValueError:
+                                    print(f"\n{RED}Invalid Marks Input.Enter Marks again.{RESET}\n")
+                                    continue    
+                                if 0 <= marks and marks <= 100:
                                     break
                                 else:
                                     print(f"\n{RED}Invalid Marks Input.Enter Marks again.{RESET}\n")
