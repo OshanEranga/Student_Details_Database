@@ -1,21 +1,29 @@
 
 student_details = []
 
+# ANSI escape sequences for text colors
+RED = '\033[91m'
+GREEN = '\033[92m'
+YELLOW = '\033[93m'
+BLUE = '\033[94m'
+MAGENTA = '\033[95m'
+CYAN = '\033[96m'
+
+# ANSI escape sequence for resetting text color
+RESET = '\033[0m'
+
 # Display Menu
 def display_menu():
-    print("Student Details Database")
-    print()
-    print("Menu")
-    print()
-    print("1 - Add New Student ")
-    print("2 - Getting details of a student")
-    print("3 - By getting details of all students")
-    print("4 - Entering marks separately for each term")
-    print("5 - Finding able to  who has the maximum average marks for a given term")
-    print("6 - Who has the lowest marks in science?")
-    print("7 - Delete student details")
-    print("8 - Exit yhe program")
-    print()
+    print(f"\n{YELLOW}Student Details Database{RESET}\n")
+    print(f"{CYAN}Menu{RESET}\n")
+    print(f"{GREEN}1{RESET} - {MAGENTA}Add New Student{RESET} ")
+    print(f"{GREEN}2{RESET} - {MAGENTA}Getting details of a student{RESET}")
+    print(f"{GREEN}3{RESET} - {MAGENTA}By getting details of all students{RESET}")
+    print(f"{GREEN}4{RESET} - {MAGENTA}Entering marks separately for each term{RESET}")
+    print(f"{GREEN}5{RESET} - {MAGENTA}Finding able to  who has the maximum average marks for a given term{RESET}")
+    print(f"{GREEN}6{RESET} - {MAGENTA}Who has the lowest marks in science?{RESET}")
+    print(f"{GREEN}7{RESET} - {MAGENTA}Delete student details{RESET}")
+    print(f"{GREEN}8{RESET} - {MAGENTA}Exit the program{RESET}\n")
 
 # Add new student
 def add_new_student():
@@ -27,9 +35,7 @@ def add_new_student():
                    "Not included","Not included","Not included","Not included",
                    "Not included","Not included","Not included","Not included")
     student_details.append(stu_details)
-    print()
-    print(f"Student Id of {stu_id} student entered.")
-    print()
+    print(f"\n{GREEN}Student Id of{RESET} {YELLOW}{stu_id}{RESET} {GREEN}student entered.{RESET}")
 
 # Getting details of a student
 def get_stu_details():
@@ -37,51 +43,43 @@ def get_stu_details():
         while True:
             stu_id = input("Please enter your student id : ")
             index = 4
+            print_details = False
             for x in student_details:
                 if stu_id == x[0]:
-                    print()
-                    print("Student Details")
-                    print()
+                    print(f"\n{MAGENTA}Student Details{RESET}\n")
                     print(f"Student Id : {x[0]}")
                     print(f"Student Name : {x[1]}")
                     print(f"Student grade : {x[2]}")
                     print(f"Student class : {x[3]}")
-                    print()
-                    print("Marks")
-                    print()
+                    print(f"\n{CYAN}Marks{RESET}\n")
                     for y in ["first","secound","third"]:
                         for z in ["Maths","Science","Art"]:
                             print(f"{y} term {z} : {x[index]}")
                             index += 1
                         print()
+                    print_details = True
                     break
-            if index == 4:
-                print("Invalid Input.Enter Student Id again.")
-                continue
-            else:
+            if print_details:
                 break
+            else:
+                print(f"\n{RED}Invalid Student Id Input.Enter Student Id again.{RESET}\n")
+                continue
 
     else:
-        print("No Student Details in database.")
-        print()
+        print(f"\n{RED}No Student Details in database.{RESET}")
 
 # By getting details of all students
 def get_all_stu_details():
     if student_details != []:
         num = 1
-        print("Details in all students")
-        print()
+        print(f"\n{CYAN}Details in all students{RESET}\n")
         for x in student_details:
-                print()
-                print(f"{num} Student Details")
-                print()
+                print(f"\n{MAGENTA}{num} Student Details{RESET}\n")
                 print(f"Student Id : {x[0]}")
                 print(f"Student Name : {x[1]}")
                 print(f"Student grade : {x[2]}")
                 print(f"Student class : {x[3]}")
-                print()
-                print("Marks")
-                print()
+                print(f"\n{CYAN}Marks{RESET}\n")
                 index = 4
                 for y in ["first","secound","third"]:
                     for z in ["Maths","Science","Art"]:
@@ -89,18 +87,15 @@ def get_all_stu_details():
                         index += 1
                     print()
                 if len(student_details) > num:
-                    print("Next Student")
+                    print(f"\n{BLUE}Next Student{RESET}")
                     num +=1
                 else:
                     if num == 1:
-                        print(f"Show details in {num} student." )
-                        print()
+                        print(f"\n{GREEN}Show details in {num} student.{RESET}")
                     else:
-                        print(f"Show details in {num} students." )
-                        print()
+                        print(f"\n{GREEN}Show details in {num} students.{RESET}")
     else:
-        print("No Student Details in database.")
-        print()
+        print(f"\n{RED}No Student Details in database.{RESET}")
 
 
 
@@ -109,13 +104,12 @@ def entering_marks():
     if student_details != []:
         while True:
             stu_id = input("Please enter your student id : ")
-            print()
             stu_index = 0
             index = 4
+            marks_entered = False
             for z in student_details:
                 if stu_id == z[0]:
-                    print("Please enter your marks")
-                    print()
+                    print(f"\n{BLUE}Please enter your marks{RESET}\n")
                     z_list = list(z)
                     for x in ["first","secound","third"]:    
                         for y in ["Maths","Science","Art"]:
@@ -124,7 +118,7 @@ def entering_marks():
                                 if 0 <= int(marks) and int(marks) <= 100:
                                     break
                                 else:
-                                    print("Invalid Input.Enter Marks again.")
+                                    print(f"\n{RED}Invalid Marks Input.Enter Marks again.{RESET}\n")
                                     continue
                             
                             z_list[index] = marks
@@ -132,17 +126,18 @@ def entering_marks():
                         print()
                     z_tuple = tuple(z_list)
                     student_details[stu_index] = z_tuple
+                    marks_entered = True
                     break
                 stu_index += 1     
-            if index == 4:
-                print("Invalid Input.Enter Student Id again.")
-                continue
-            else:
-                print("Entering marks successfully.")
+            if marks_entered:
+                print(F"\n{GREEN}Entering marks successfully.{RESET}")
                 break
+            else:
+                print(f"\n{RED}Invalid Input.Enter Student Id again.{RESET}\n")
+                continue
     else:
-        print("No Student Details in database.")
-        print()
+        print(f"\n{RED}No Student Details in database.{RESET}")
+        
 
 # Calculate average in list
 def average(list : list) ->float:
@@ -187,23 +182,35 @@ def find_lowest_marks_science_students_id(term : int) ->list | int:
 
 # Delete student detail
 def delete_details():
-    stu_id = input("Enter student id for delete : ") 
-    print()
-    index = 0
-    for x in student_details:
-        if stu_id == x[0]:
-            student_details.pop(index)
-            break
-        index += 1
-    print(f"Id of {stu_id} student details deleted.")
-    print()
+    if student_details != []:
+        while True:
+            stu_id = input("Enter student id for delete : ")
+            delete = False
+            index = 0
+            for x in student_details:
+                if stu_id == x[0]:
+                    student_details.pop(index)
+                    delete = True
+                    break
+                index += 1
+            if delete:
+                print(f"\n{GREEN}Id of{RESET} {YELLOW}{stu_id}{RESET} {GREEN}student details{RESET} {RED}deleted.{RESET}")
+                break
+            else:
+                print(f"\n{RED}Invalid Student Id Input.Enter Student Id again.{RESET}\n")
+                continue
+    else:
+        print(f"\n{RED}No Student Details in database for delete students details.{RESET}")
 
 
 
 while True:
     display_menu()
-    choice = int(input("Please enter your choice : "))
-    print()
+    try:
+        choice = int(input("Please enter your choice number : "))
+    except ValueError:
+        print(f"\n{RED}An invalid input(choice number) was entered.Re-enter a valid input(choice number).{RESET}\n")
+        continue
     if choice == 1:
         add_new_student()
     elif choice == 2:
@@ -215,61 +222,56 @@ while True:
         print()
     elif choice == 5:
         while True:
-            term = int(input("Enter the term number(1/2/3) : "))
-            print()
+            try:
+                term = int(input("Enter the term number(1/2/3) : "))
+            except ValueError:
+                print(f"\n{RED}An invalid input(term number) was entered.Re-enter a valid input(term number).{RESET}\n")
+                continue
+                
             if term == 1 or term == 2 or term == 3:
                 max_students_id_list , max_average = find_term_max_average_students_id(term)
-                print("Maximum average marks Students")
-                print()
-                print("Student Id | Student Name")
-                print()
+                print(f"\n{MAGENTA}Maximum average marks Students{RESET}\n")
+                print(f"{YELLOW}Student Id | Student Name{RESET}\n")
                 for k in student_details:
                     for j in max_students_id_list:
                         if k[0] == j:
                             print(f"{j} | {k[1]}")
-                print()
-                print(f"Maximum average is {round(max_average,2)}.")
-                print()
+                print(f"\n{GREEN}Maximum average is {round(max_average,2)}.{RESET}")
                 break
 
             else:
-                print("Invalid input.Please re-enter the term number.")
-                print()
+                print(f"\n{RED}Wroung term number.Please re-enter the term number.{RESET}\n")
                 continue
     elif choice == 6:
             while True:
-                term = int(input("Enter the term number(1/2/3) : "))
-                print()    
+                try:
+                    term = int(input("Enter the term number(1/2/3) : "))
+                except ValueError:
+                    print(f"\n{RED}An invalid input(term number) was entered.Re-enter a valid input(term number).{RESET}\n")
+                    continue
                 if term == 1 or term == 2 or term == 3:
                     min_science_students_id_list,loweest_marks = find_lowest_marks_science_students_id(term)
-                    print("lowest marks in science Students") 
-                    print()
-                    print("Student Id | Student Name")
-                    print()
+                    print(f"\n{MAGENTA}lowest marks in science Students{RESET}\n") 
+                    print(f"{YELLOW}Student Id | Student Name{RESET}\n")
                     for k in student_details:
                         for j in min_science_students_id_list:
                             if k[0] == j:
                                 print(f"{j} | {k[1]}")
-
-                    print()
-                    print(f"Lowest marks in science is {loweest_marks}.")
-                    print()
+                    print(f"\n{GREEN}Lowest marks in science is {loweest_marks}.{RESET}\n")
                     break
 
                 else:
-                    print("Invalid input.Please re-enter the term number.")
-                    print()
+                    print(f"\n{RED}Wrong term number.Please re-enter the term number.{RESET}\n")
                     continue         
 
     elif choice == 7:
         delete_details()
 
     elif choice == 8:
-        print("Exit program.")
+        print(f"\n{BLUE}Exit program.{RESET}")
         break
     else:
-        print("Invalid Input.Try again")
-        print()
+        print(f"\n{RED}Wroung choice number.Please re-enter the choice number.{RESET}\n")
         continue
 
     
