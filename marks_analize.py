@@ -14,7 +14,8 @@ RESET = '\033[0m'
 
 # Display Menu
 def display_menu():
-    print(f"\n{YELLOW}Student Details Database{RESET}\n")
+    print(f"{YELLOW}-------------------------------------------------------------------------{RESET}")
+    print(f"{YELLOW}Student Details Database{RESET}\n")
     print(f"{CYAN}Menu{RESET}\n")
     print(f"{GREEN}1{RESET} - {MAGENTA}Add New Student{RESET} ")
     print(f"{GREEN}2{RESET} - {MAGENTA}Getting details of a student{RESET}")
@@ -23,7 +24,8 @@ def display_menu():
     print(f"{GREEN}5{RESET} - {MAGENTA}Finding able to  who has the maximum average marks for a given term{RESET}")
     print(f"{GREEN}6{RESET} - {MAGENTA}Who has the lowest marks in science?{RESET}")
     print(f"{GREEN}7{RESET} - {MAGENTA}Delete student details{RESET}")
-    print(f"{GREEN}8{RESET} - {MAGENTA}Exit the program{RESET}\n")
+    print(f"{GREEN}8{RESET} - {MAGENTA}Exit the program{RESET}")
+    print(f"{YELLOW}-------------------------------------------------------------------------{RESET}")
 
 # Add new student
 def add_new_student():
@@ -72,7 +74,7 @@ def get_stu_details():
 def get_all_stu_details():
     if student_details != []:
         num = 1
-        print(f"\n{CYAN}Details in all students{RESET}\n")
+        print(f"{CYAN}Details in all students{RESET}\n")
         for x in student_details:
                 print(f"\n{MAGENTA}{num} Student Details{RESET}\n")
                 print(f"Student Id : {x[0]}")
@@ -215,6 +217,7 @@ while True:
     except ValueError:
         print(f"\n{RED}An invalid input(choice number) was entered.Re-enter a valid input(choice number).{RESET}\n")
         continue
+    print(f"{YELLOW}-------------------------------------------------------------------------{RESET}")
     if choice == 1:
         add_new_student()
     elif choice == 2:
@@ -272,7 +275,7 @@ while True:
         delete_details()
 
     elif choice == 8:
-        print(f"\n{BLUE}Exit program.{RESET}")
+        print(f"{BLUE}Exit program.{RESET}")
         break
     else:
         print(f"\n{RED}Wroung choice number.Please re-enter the choice number.{RESET}\n")
